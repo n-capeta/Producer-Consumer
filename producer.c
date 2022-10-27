@@ -17,4 +17,12 @@ int main(){
     //Map the shared map
     table = mmap(0, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
+
+
+
+    //Removing shared mem
+    munmap(table, sizeof(int));
+    close(shm_fd);
+    shm_unlink(name);
+    return 0;
 }
