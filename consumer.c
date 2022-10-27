@@ -1,13 +1,21 @@
-#include <sys/ipc.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <fcntl.h>
 #include <sys/shm.h>
-#include <sys/types.h>
-#include<sys/shm.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <semaphore.h>
 
 int main(){
-    //Hold where process is attached w/ shared memory
-    void *shared_memory;
-    int shmid;
+    int shm_fd;
+    int * table;
 
-    shmid = shmget((key_t)1122, 1024, 0666|IPC_CREAT);
-    shared_memory = shmat(shmid, NULL, 0);
+    //Create the shared memory store in description
+    shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666)
+
+    ftruncate(shm_fd, sizeof(int));
+
+    //Map the shared memory to my function
+    table = mmap(0, sizeof(int), PROT_READ | PROD_WRITE, MAP_SHARED, shm_fd, 0);
 }
