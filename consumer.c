@@ -32,8 +32,23 @@ int main(){
     avail = sem_open(sema2, O_CREAT, 0666, 3);
 
     //Mutex for the mutal exclusion on the table
-    mutex = sem_open(seam3, O_CREAT, 0666, 1);
+    mutex = sem_open(sema3, O_CREAT, 0666, 1);
 
+    //Not sure if loop is the solution here. Need to do more learning about pthreads then circle back
+    int loop = 2; // Size based off project requirements
+
+    printf("\n Producer: I have started producing. \n");
+    while(loop--){
+        sem_wait(avail);
+        sleep(rand()%2+1);
+        sem_wait(mutex);
+        (* table)++;
+        sem_post(mutex);
+        printf("Producer: Produced, there are %d produced now\n", * shelf);
+        sem_post(fill);
+    }
+
+    printf("Producer: Time is up. I produced 2. %d are left.\n", * shelf);
 
 
     //Unlinking & Closing semaphores

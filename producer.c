@@ -14,7 +14,7 @@ int main(){
 
     const char * sema1= "fill";
     const char * sema2= "avail";
-    const char * sema3="mutex";
+    const char * sema3= "mutex";
 
 
     //Open the shared mem
@@ -27,6 +27,19 @@ int main(){
     fill = sem_open(sema1, O_CREAT,0666,0);
     avail = sem_open(sema2, O_CREAT, 0666, 3);
     mutex = sem_open(sema3,O_CREAT,0666,1);
+
+    //Not sure if loop is the solution here. Need to do more learning about pthreads then circle back
+    int loop = 2; // Size based off project requirement
+
+    while(loop--){
+        sem_wait(fill);
+        sleep(rand()%2+1);
+        sem_wait(mutex);
+        (* table)--;
+        sem_post(mutex);
+        printf("Consumer: I am consuming\n");
+        sem_post(avail);
+    }
 
 
 
