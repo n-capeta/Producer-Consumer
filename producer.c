@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <sys/mman.h>
 #include <semaphore.h>
+#include <pthread.h>
 
 int main(){
     int shm_fd;
@@ -15,6 +16,8 @@ int main(){
     const char * sema1= "fill";
     const char * sema2= "avail";
     const char * sema3= "mutex";
+    sem_t * fill, * available, * mutex;
+
 
 
     //Open the shared mem
@@ -25,7 +28,7 @@ int main(){
 
     //Open semaphores
     fill = sem_open(sema1, O_CREAT,0666,0);
-    avail = sem_open(sema2, O_CREAT, 0666, 3);
+    available = sem_open(sema2, O_CREAT, 0666, 3);
     mutex = sem_open(sema3,O_CREAT,0666,1);
 
     //Not sure if loop is the solution here. Need to do more learning about pthreads then circle back
@@ -38,14 +41,14 @@ int main(){
         (* table)--;
         sem_post(mutex);
         printf("Consumer: I am consuming\n");
-        sem_post(avail);
+        sem_post(available);
     }
 
 
 
     //Unlink & Close semaphores
     sem_close(fill);
-    sem_close(avail);
+    sem_close(available);
     sem_close(mutex);
     sem_unlink(sema1);
     sem_unlink(sema2);
