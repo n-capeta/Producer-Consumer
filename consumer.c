@@ -22,7 +22,6 @@ int main(){
     const char * sema3= "mutex";
     sem_t * mutex;
 
-
     //Open the shared mem
     shm_fd = shm_open(name, O_RDWR, 0666);
 
@@ -46,7 +45,6 @@ int main(){
         printf("Consumer: I am consuming\n");
         sem_post(available);
     }
-
 
 
     //Unlink & Close semaphores
