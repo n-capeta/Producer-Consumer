@@ -14,10 +14,13 @@ int main(){
     const char * name = "shared_memory";
 
     const char * sema1= "fill";
-    const char * sema2= "avail";
-    const char * sema3= "mutex";
-    sem_t * fill, * available, * mutex;
+    sem_t * fill;
 
+    const char * sema2= "avail";
+    sem_t * available;
+
+    const char * sema3= "mutex";
+    sem_t * mutex;
 
 
     //Open the shared mem

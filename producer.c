@@ -14,9 +14,13 @@ int main(){
     const char * name = "shared_memory";
 
     const char * sema1 = "fill";
+    sem_t * fill;
+
     const char * sema2 = "available";
+    sem_t * available;
+
     const char * sema3 = "mutex";
-    sem_t * fill, * available, * mutex;
+    sem_t * mutex;
 
     //Create the shared memory store in description
     shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);
