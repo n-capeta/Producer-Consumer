@@ -37,7 +37,7 @@ int main(){
     mutex = sem_open(sema3, O_CREAT, 0666, 1);
 
     //Not sure if loop is the solution here. Need to do more learning about pthreads then circle back
-    int loop = 5; // Loop to run a couple times
+    int loop = 5; // Loop to run a couple times 
 
     printf("\n Producer: I have started producing. \n");
     while(loop--){
