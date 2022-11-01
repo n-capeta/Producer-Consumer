@@ -24,7 +24,7 @@ int main(){
     shm_fd = shm_open(name, O_RDWR, 0666);
 
     //Map the shared map
-    table = mmap(0, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+    table = mmap(0, sizeof(2), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
     //Open semaphores
     fill = sem_open(sema1, O_CREAT,0666,0);
@@ -32,7 +32,7 @@ int main(){
     mutex = sem_open(sema3,O_CREAT,0666,1);
 
     //Not sure if loop is the solution here. Need to do more learning about pthreads then circle back
-    int loop = 2; // Size based off project requirement
+    int loop = 5; // Loop to run a couple times
 
     while(loop--){
         sem_wait(fill);

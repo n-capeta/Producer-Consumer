@@ -21,10 +21,10 @@ int main(){
     //Create the shared memory store in description
     shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);
 
-    ftruncate(shm_fd, sizeof(int));
+    ftruncate(shm_fd, sizeof(2));
 
     //Map the shared memory to my function
-    table = mmap(0, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
+    table = mmap(0, sizeof(2), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
 
     //Creating semaphores
     //Consumer post filling the table
@@ -37,8 +37,8 @@ int main(){
     mutex = sem_open(sema3, O_CREAT, 0666, 1);
 
     //Not sure if loop is the solution here. Need to do more learning about pthreads then circle back
-    int loop = 2; // Size based off project requirements
-
+    int loop = 5; // Loop to run a couple times
+    
     printf("\n Producer: I have started producing. \n");
     while(loop--){
         sem_wait(available);
